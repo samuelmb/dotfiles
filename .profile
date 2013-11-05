@@ -1,21 +1,8 @@
-source /Users/sam/.rbenvrc
-
 # Editor and colors
 export EDITOR="subl -w"
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='01;33'
-
-# Password-vault
-export PATH="$PATH:$HOME/stripe/password-vault/bin"
-source "$HOME/stripe/password-vault/bash_completion"
-
-# Space Commander
-export PATH="$PATH:$HOME/stripe/space-commander/bin"
-alias ssh=sc-ssh-wrapper
-
-# Henson
-export PATH="$PATH:$HOME/stripe/henson/bin"
 
 # Aliases
 alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
