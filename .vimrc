@@ -19,11 +19,13 @@ set clipboard=unnamed " copy/paste to/from system clipboard
 set splitright " new vertical splits appear on right
 set mouse=a
 set noswapfile " disable .swp file generation
+set modeline
+set ls=2
 
 " aesthetics
 syntax on
 set t_Co=256
-set background=dark
+set background=light
 colorscheme solarized
 
 " tab options
@@ -38,13 +40,16 @@ set backspace=indent,eol,start
 set colorcolumn=80
 
 " navigation
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap G Gzz
+nnoremap G Gzb
 nnoremap j gj
 nnoremap k gk
 inoremap jk <esc>
 vnoremap jk <esc>
+
+nnoremap <c-k> <c-w>w
+nnoremap <c-j> <c-w>W
+nnoremap <c-h> <c-w>W
+nnoremap <c-l> <c-w>w
 
 " try to keep backups and .swp files out of the working directory
 set directory=~/.tmp//,/tmp//,.
@@ -57,9 +62,13 @@ hi NonText guifg=Grey30 guibg=Grey20
 autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
-" resize splits when the window is resized.
+" resize splits when the window is resized
 autocmd VimResized * exe "normal! \<c-w>="
+
+" tab autcompletes
+:imap <TAB> <C-N>
 
 " follow the leader
 let mapleader = ","
@@ -70,7 +79,7 @@ nnoremap <leader>r :source ~/.vimrc<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>S :w!<cr>
 nnoremap <leader>p :set paste!<cr>
-nnoremap <leader>w q
+nnoremap <leader>q q
 nnoremap <leader>e :vnew<cr>
 nnoremap <leader>f :noh<cr>
 
@@ -83,4 +92,13 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gw :Gbrowse<CR>
 vnoremap <leader>gw :Gbrowse<CR>
 nnoremap <leader>gl :Glog<CR><CR><CR>:copen<CR>
+
+nnoremap <leader>1 :set background=light<CR>
+nnoremap <leader>2 :set background=dark<CR>
+
+" ctrl-p
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+nnoremap <leader>t :CtrlP<cr>
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_max_files = 0
 
