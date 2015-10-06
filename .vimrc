@@ -25,7 +25,7 @@ set ls=2
 " aesthetics
 syntax on
 set t_Co=256
-set background=light
+set background=dark
 colorscheme solarized
 
 " tab options
@@ -79,7 +79,7 @@ nnoremap <leader>r :source ~/.vimrc<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>S :w!<cr>
 nnoremap <leader>p :set paste!<cr>
-nnoremap <leader>q q
+nnoremap <leader>q :q<cr>
 nnoremap <leader>e :vnew<cr>
 nnoremap <leader>f :noh<cr>
 
