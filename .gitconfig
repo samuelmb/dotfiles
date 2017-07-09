@@ -1,29 +1,16 @@
 [user]
-	name = Sam Balinghasay
-	email = sam@stripe.com
-[alias]
-  aa = add .
-	st = status
-  d = diff
-  dc = diff --cached
-	co = checkout
-	ci = commit
-  cm = commit -m
-	br = branch
-	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ar%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	gr = grep -n -C 2 --heading
-  pl = git fetch && git rebase
+  name = Sam Balinghasay
+  email = samuel.balinghasay@gmail.com
 [color]
-	ui = auto
+  ui = auto
 [color "grep"]
   filename = white
   match = blue
 [color "diff"]
   meta = white
 [apply]
-	whitespace = fix
+  whitespace = fix
 [push]
-	default = current
+  default = current
 [branch "master"]
-	mergeoptions = --ff-only
-
+  mergeoptions = --ff-only

@@ -28,6 +28,10 @@ set t_Co=256
 set background=dark
 colorscheme solarized
 
+" copy paste biznass
+vnoremap <C-c> :w !pbcopy<CR><CR>
+noremap <C-v> :r !pbpaste<CR><CR>
+
 " tab options
 filetype plugin indent on
 set shiftwidth=2
@@ -40,6 +44,11 @@ set backspace=indent,eol,start
 set colorcolumn=80
 
 " navigation
+
+map <c-n> :NERDTreeToggle<CR><c-w>=
+
+let NERDTreeIgnore = ['\.pyc$']
+
 nnoremap G Gzb
 nnoremap j gj
 nnoremap k gk
@@ -59,7 +68,15 @@ set backupdir=~/.tmp//,/tmp//,.
 highlight TrailingSpaces ctermbg=grey guibg=grey
 match TrailingSpaces /\s\+$\| \+\ze\t/
 hi NonText guifg=Grey30 guibg=Grey20
-autocmd BufWritePre * :%s/\s\+$//e
+
+fun! StripTrailingWhiteSpace()
+  " don't strip on these filetypes
+  if &ft =~ 'markdown'
+    return
+  endif
+  %s/\s\+$//e
+endfun
+autocmd bufwritepre * :call StripTrailingWhiteSpace()
 
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -83,16 +100,6 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>e :vnew<cr>
 nnoremap <leader>f :noh<cr>
 
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>ge :Gedit<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :Ggrep -n -C 2 --heading<Space>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gw :Gbrowse<CR>
-vnoremap <leader>gw :Gbrowse<CR>
-nnoremap <leader>gl :Glog<CR><CR><CR>:copen<CR>
-
 nnoremap <leader>1 :set background=light<CR>
 nnoremap <leader>2 :set background=dark<CR>
 
@@ -101,4 +108,21 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 nnoremap <leader>t :CtrlP<cr>
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_max_files = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.vagrant)|[\/](hive|hive-app|hogwarts-app|project_codes_ui)\/(tmp|node_modules|bower_components)$',
+  \ 'file': '\v\.(exe|so|dll|pyc)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
+set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+set statusline+="%#warningmsg#"
+set statusline+="%*"
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 3
+let g:syntastic_html_checkers=['']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_post_args='--ignore=E261,E265,E402'
